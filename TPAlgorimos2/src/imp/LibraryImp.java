@@ -1,5 +1,7 @@
 package imp;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import interfaces.Filter;
 import interfaces.Label;
@@ -52,6 +54,15 @@ public class LibraryImp implements Library
 	{
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+public List<Label> getLabels2(Filter f) {
+		
+		Set<Label> labels = new HashSet<Label>();
+		for(Title title:getTitles()) {
+			labels.addAll(title.getAtt(f));
+		}
+		return (List<Label>)labels;
 	}
 
 }
