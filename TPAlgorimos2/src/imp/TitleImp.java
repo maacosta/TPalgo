@@ -11,7 +11,7 @@ public class TitleImp implements Title
 {
 	public String name;
 	public String path;
-	
+	public Hashtable<Filter, List<Label>> atts = new Hashtable<Filter, List<Label>>;
 	
 	@Override
 	public String getName()
@@ -28,8 +28,15 @@ public class TitleImp implements Title
 	@Override
 	public Hashtable<Filter,List<Label>> getAtts()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return this.atts;
+	}
+	
+	public List<Label> getAtt(Filter attribute) 
+	{
+		if(atts.containsKey(attribute)) {
+			return atts.get(attribute);
+		}
+		else return null;
 	}
 
 }
