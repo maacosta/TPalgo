@@ -11,7 +11,7 @@ public class TitleImp implements Title
 {
 	public String name;
 	public String path;
-	public Hashtable<Filter, List<Label>> atts = new Hashtable<Filter, List<Label>>;
+	public Hashtable<Filter, List<Label>> atts = new Hashtable<Filter, List<Label>>();
 	
 	@Override
 	public String getName()
