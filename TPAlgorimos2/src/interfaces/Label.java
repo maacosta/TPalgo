@@ -6,5 +6,5 @@ public interface Label
 {
 	public String getName();
 	public List<Title> getTitles();
-	public List<String> getSublabels();
+	public List<Label> getSublabels();
 }

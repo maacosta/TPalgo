@@ -22,7 +22,7 @@ public class LabelImp implements Label
 	}
 
 	@Override
-	public List<String> getSublabels()
+	public List<Label> getSublabels()
 	{
 		// TODO Auto-generated method stub
 		return null;
