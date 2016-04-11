@@ -8,6 +8,11 @@ public class LabelImp implements Label
 {
 	public String name;
 	
+	public LabelImp(String name)
+	{
+		this.name = name;
+	}
+	
 	@Override
 	public String getName()
 	{
