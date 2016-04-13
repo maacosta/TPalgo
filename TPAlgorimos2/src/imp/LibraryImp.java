@@ -2,6 +2,7 @@ package imp;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import interfaces.Filter;
 import interfaces.Label;
@@ -11,12 +12,13 @@ import interfaces.Title;
 public class LibraryImp implements Library
 {
 	public List<Filter> filters;
+	public Set<Title> titles = new HashSet<Title>();
 
 	@Override
 	public List<Title> getTitles()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		// TODO cargar titulos a titles
+		return titles;
 	}
 
 	@Override
@@ -49,14 +51,17 @@ public class LibraryImp implements Library
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Title> getTitles(Filter f, Label lb)
 	{
 		// TODO Auto-generated method stub
-		return null;
+		Stream<Title> titlesList = titles.stream().filter(it -> it.getAtt(f).contains(lb));
+		
+		return (List<Title>)titlesList;
 	}
 	
-public List<Label> getLabels2(Filter f) {
+	public List<Label> getLabels2(Filter f) {
 		
 		Set<Label> labels = new HashSet<Label>();
 		for(Title title:getTitles()) {
