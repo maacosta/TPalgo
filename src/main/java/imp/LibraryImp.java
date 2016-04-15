@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import entities.ConfigEntity;
+import entities.LibraryEntity;
 import interfaces.Filter;
 import interfaces.Label;
 import interfaces.Library;
@@ -11,9 +13,17 @@ import interfaces.Title;
 
 public class LibraryImp implements Library
 {
+	private LibraryEntity _libraryEntity;
+	private ConfigEntity _configEntity;
 	public List<Filter> filters;
 	public Set<Title> titles = new HashSet<Title>();
 
+	public LibraryImp(LibraryEntity libraryEntity, ConfigEntity configEntity)
+	{
+		this._libraryEntity = libraryEntity;
+		this._configEntity = configEntity;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Title> getTitles()
 	{
