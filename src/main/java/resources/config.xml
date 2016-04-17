@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jml-config>
 	<separador>;</separador>
+	<info-jml-name>info.jml</info-jml-name>
 </jml-config>
