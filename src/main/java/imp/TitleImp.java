@@ -13,19 +13,17 @@ public class TitleImp implements Title
 	public String path;
 	public Hashtable<Filter, List<Label>> atts = new Hashtable<Filter, List<Label>>();
 	
-	@Override
 	public String getName()
 	{
 		return this.name;
 	}
 
-	@Override
+	
 	public String getPath()
 	{
 		return this.path;
 	}
 
-	@Override
 	public Hashtable<Filter,List<Label>> getAtts()
 	{
 		return this.atts;
