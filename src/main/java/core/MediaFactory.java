@@ -15,12 +15,14 @@ public class MediaFactory
 	{
 		this._path = path;
 		this._configManager = new ConfigManager();
-		this._jmlReader = new JmlReader(this._configManager.getValue("info-jml-name"));
+		this._jmlReader = new JmlReader(this._configManager);
 		
 	}
 	
 	public Library CreateLibrary()
 	{
+		this._libraryEntity = new LibraryEntity();
+		
 		Library l = new LibraryImp(this._libraryEntity, this._configManager);
 		
 		return l;

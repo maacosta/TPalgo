@@ -1,4 +1,5 @@
 package imp;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -6,6 +7,7 @@ import java.util.stream.Stream;
 
 import core.ConfigManager;
 import entities.LibraryEntity;
+import entities.TitleEntity;
 import interfaces.Filter;
 import interfaces.Label;
 import interfaces.Library;
@@ -14,35 +16,39 @@ import interfaces.Title;
 public class LibraryImp implements Library
 {
 	private LibraryEntity _libraryEntity;
-	private ConfigManager _configManager;
-	public List<Filter> filters;
-	public Set<Title> titles = new HashSet<Title>();
-
-	public LibraryImp(LibraryEntity libraryEntity, ConfigManager configManager)
+	
+	
+	public LibraryImp(LibraryEntity libraryEntity)
 	{
 		this._libraryEntity = libraryEntity;
-		this._configManager = configManager;
 	}
 	
-	@SuppressWarnings("unchecked")
+	
 	public List<Title> getTitles()
 	{
-		// TODO cargar titulos a titles
-		return (List<Title>)titles;
+		List<Title> titleList = new ArrayList<Title>();
+		
+		this._libraryEntity.Titles.forEach(te -> 
+		{
+			titleList.add(new TitleImp(this._libraryEntity, te));
+		});
+		
+		return titleList;
 	}
 
 	public List<Filter> getFilters()
 	{
-		return this.filters;
+		throw new UnsupportedOperationException();
 	}
 
 	public Filter getFilter(String filtername)
 	{
-		for (Filter filter : this.filters){
+		throw new UnsupportedOperationException();
+		/*for (Filter filter : this.filters){
 			if(filter.getName() == filtername)
 				return filter;
 		}
-		return null;
+		return null;*/
 	}
 
 	public List<Label> getLabels(Filter f)
@@ -53,27 +59,14 @@ public class LibraryImp implements Library
 
 	public Label getLabel(Filter f, String labelname)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Title> getTitles(Filter f, Label lb)
 	{
-		// TODO Auto-generated method stub
-		Stream<Title> titlesList = titles.stream().filter(it -> it.getAtt(f).contains(lb));
+		throw new UnsupportedOperationException();
+		/*Stream<Title> titlesList = titles.stream().filter(it -> it.getAtt(f).contains(lb));
 		
-		return (List<Title>)titlesList;
+		return (List<Title>)titlesList;*/
 	}
-	
-	@SuppressWarnings("unchecked")
-	public List<Label> getLabels2(Filter f) {
-		
-		Set<Label> labels = new HashSet<Label>();
-		for(Title title:getTitles()) {
-			labels.addAll(title.getAtt(f));
-		}
-		return (List<Label>)labels;
-	}
-
 }

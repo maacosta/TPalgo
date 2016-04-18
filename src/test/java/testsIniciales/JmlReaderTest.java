@@ -3,6 +3,7 @@ package testsIniciales;
 import org.junit.Test;
 
 import core.JmlReader;
+import entities.ConfigEntity;
 import entities.TitleEntity;
 import junit.framework.Assert;
 
@@ -11,7 +12,10 @@ public class JmlReaderTest
 	@Test
 	public void testGetInfo1()
 	{
-		JmlReader reader = new JmlReader("info1.jml");
+		ConfigEntity config = new ConfigEntity();
+		config.InfoJmlName = "info1.jml";
+		config.Separador = ";";
+		JmlReader reader = new JmlReader(config);
 		String infoPath = this.getClass().getResource("/testResources/").getPath();
 		TitleEntity t = reader.getInfo(infoPath.substring(1));
 		
@@ -29,7 +33,10 @@ public class JmlReaderTest
 	@Test
 	public void testGetInfo2()
 	{
-		JmlReader reader = new JmlReader("info2.jml");
+		ConfigEntity config = new ConfigEntity();
+		config.InfoJmlName = "info2.jml";
+		config.Separador = ";";
+		JmlReader reader = new JmlReader(config);
 		String infoPath = this.getClass().getResource("/testResources/").getPath();
 		TitleEntity t = reader.getInfo(infoPath.substring(1));
 		

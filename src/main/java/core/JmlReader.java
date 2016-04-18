@@ -7,18 +7,21 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import entities.ConfigEntity;
 import entities.FilterEntity;
 import entities.LabelEntity;
 import entities.TitleEntity;
 
 public class JmlReader
 {
-	private String _infoJmlName;
+	private ConfigEntity _configEntity;
 	
-	public JmlReader(String infoJmlName)
+	
+	public JmlReader(ConfigEntity configEntity)
 	{
-		this._infoJmlName = infoJmlName;
+		this._configEntity = configEntity;
 	}
+	
 	
 	public TitleEntity getInfo(String path)
 	{
@@ -35,7 +38,7 @@ public class JmlReader
 	private List<String> GetLines(String path)
 	{
 		List<String> fileLines = null;
-		Path jml = Paths.get(path, this._infoJmlName);
+		Path jml = Paths.get(path, this._configEntity.InfoJmlName);
 		try
 		{
 			fileLines = Files.readAllLines(jml);
@@ -61,13 +64,13 @@ public class JmlReader
 			
 			FilterEntity fe = new FilterEntity(fn);
 			
-			if(fv.indexOf(";") == -1)
+			if(fv.indexOf(this._configEntity.Separador) == -1)
 			{
 				fe.Labels.add(new LabelEntity(fv));
 			}
 			else
 			{
-				String[] fvList = fv.split(";");
+				String[] fvList = fv.split(this._configEntity.Separador);
 				for(String v : fvList)
 				{
 					fe.Labels.add(new LabelEntity(v));

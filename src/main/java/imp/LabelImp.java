@@ -1,22 +1,29 @@
 package imp;
 import java.util.List;
 
+import entities.LabelEntity;
+import entities.LibraryEntity;
 import interfaces.Label;
+import interfaces.Library;
 import interfaces.Title;
 
 
 public class LabelImp implements Label
 {
-	public String name;
+	private LibraryEntity _libraryEntity;
+	private LabelEntity _labelEntity;
 	
-	public LabelImp(String name)
+	
+	public LabelImp(LibraryEntity libraryEntity, LabelEntity labelEntity)
 	{
-		this.name = name;
+		this._libraryEntity = libraryEntity;
+		this._labelEntity = labelEntity;
 	}
+	
 	
 	public String getName()
 	{
-		return this.name;
+		return this._labelEntity.Nombre;
 	}
 
 	public List<Title> getTitles()

@@ -3,38 +3,52 @@ package imp;
 import java.util.Hashtable;
 import java.util.List;
 
+import entities.FilterEntity;
+import entities.LibraryEntity;
+import entities.TitleEntity;
 import interfaces.Filter;
 import interfaces.Label;
+import interfaces.Library;
 import interfaces.Title;
 
 public class TitleImp implements Title
 {
-	public String name;
-	public String path;
-	public Hashtable<Filter, List<Label>> atts = new Hashtable<Filter, List<Label>>();
+	private LibraryEntity _libraryEntity;
+	private TitleEntity _titleEntity;
+
+	
+	public TitleImp(LibraryEntity libraryEntity, TitleEntity titleEntity)
+	{
+		this._libraryEntity = libraryEntity;
+		this._titleEntity = titleEntity;
+	}
+	
 	
 	public String getName()
 	{
-		return this.name;
+		return this._titleEntity.Nombre;
 	}
 
 	
 	public String getPath()
 	{
-		return this.path;
+		return this._titleEntity.Path;
 	}
 
 	public Hashtable<Filter,List<Label>> getAtts()
 	{
-		return this.atts;
+		Hashtable<Filter, List<Label>> hash = new Hashtable<Filter, List<Label>>();
+		
+		this._titleEntity.Filters.forEach(fe -> 
+		{
+			Filter f = new FilterImp(this._libraryEntity, fe);
+			hash.put(f, f.getLabels());
+		});
+		throw new UnsupportedOperationException();
 	}
 	
 	public List<Label> getAtt(Filter attribute) 
 	{
-		if(atts.containsKey(attribute)) {
-			return atts.get(attribute);
-		}
-		else return null;
+		throw new UnsupportedOperationException();
 	}
-
 }
