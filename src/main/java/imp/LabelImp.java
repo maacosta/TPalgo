@@ -28,14 +28,12 @@ public class LabelImp implements Label
 
 	public List<Title> getTitles()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	public List<Label> getSublabels()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 	
 }
