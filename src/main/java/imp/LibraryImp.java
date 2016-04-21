@@ -1,11 +1,13 @@
 package imp;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
 import core.ConfigManager;
+import entities.FilterEntity;
 import entities.LibraryEntity;
 import entities.TitleEntity;
 import interfaces.Filter;
@@ -38,7 +40,22 @@ public class LibraryImp implements Library
 
 	public List<Filter> getFilters()
 	{
-		throw new UnsupportedOperationException();
+		List<Filter> f = new ArrayList<Filter>();
+		Hashtable<String, FilterEntity> hash = new Hashtable<String, FilterEntity>();
+		
+		for(TitleEntity te : this._libraryEntity.Titles)
+		{
+			for(FilterEntity fe : te.Filters)
+			{
+				if(!hash.containsKey(fe.Nombre))
+				{
+					hash.put(fe.Nombre, fe);
+					f.add(new FilterImp(this._libraryEntity, fe));
+				}
+			}
+		}
+		
+		return f;
 	}
 
 	public Filter getFilter(String filtername)
