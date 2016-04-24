@@ -50,7 +50,7 @@ public class LibraryImp implements Library
 				if(!hash.containsKey(fe.Nombre))
 				{
 					hash.put(fe.Nombre, fe);
-					f.add(new FilterImp(this._libraryEntity, fe));
+					f.add(new FilterImp(this._libraryEntity, fe.Nombre));
 				}
 			}
 		}

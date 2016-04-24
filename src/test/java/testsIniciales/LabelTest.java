@@ -13,7 +13,7 @@ public class LabelTest extends TestCase
 		String labelName = "Rock";
 		LibraryEntity lie = new LibraryEntity();
 		LabelEntity le = new LabelEntity(labelName);
-		Label l = new LabelImp(lie, le);
+		Label l = new LabelImp(lie, le.Nombre);
 		assertEquals(labelName, l.getName());
 	}
 }

@@ -41,7 +41,7 @@ public class TitleImp implements Title
 		
 		this._titleEntity.Filters.forEach(fe -> 
 		{
-			Filter f = new FilterImp(this._libraryEntity, fe);
+			Filter f = new FilterImp(this._libraryEntity, fe.Nombre);
 			hash.put(f, f.getLabels());
 		});
 		throw new UnsupportedOperationException();

@@ -11,19 +11,19 @@ import interfaces.Title;
 public class LabelImp implements Label
 {
 	private LibraryEntity _libraryEntity;
-	private LabelEntity _labelEntity;
+	private String _labelname;
 	
 	
-	public LabelImp(LibraryEntity libraryEntity, LabelEntity labelEntity)
+	public LabelImp(LibraryEntity libraryEntity, String labelname)
 	{
 		this._libraryEntity = libraryEntity;
-		this._labelEntity = labelEntity;
+		this._labelname = labelname;
 	}
 	
 	
 	public String getName()
 	{
-		return this._labelEntity.Nombre;
+		return this._labelname;
 	}
 
 	public List<Title> getTitles()
