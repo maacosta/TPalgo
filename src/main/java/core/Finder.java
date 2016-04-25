@@ -5,9 +5,16 @@ import java.nio.file.FileVisitResult;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.ArrayList;
+import java.util.List;
+
+import entities.ConfigEntity;
+import entities.TitleEntity;
 
 public class Finder extends SimpleFileVisitor<Path>
 {
+	List<TitleEntity> titles = new ArrayList<TitleEntity>();
+	JmlReader reader = new JmlReader(new ConfigEntity());
 
 	@Override
 	public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException
@@ -22,7 +29,7 @@ public class Finder extends SimpleFileVisitor<Path>
 		if(attrs.isRegularFile() && file.endsWith("info.jml")) {
 			
 			System.out.println(file);
-			
+			reader.getInfo(file.toString());
 		}
 		return FileVisitResult.CONTINUE;
 	}
