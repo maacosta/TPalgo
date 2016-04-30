@@ -1,12 +1,12 @@
 package core;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-
 import entities.ConfigEntity;
 import entities.FilterEntity;
 import entities.LabelEntity;
@@ -30,7 +30,7 @@ public class JmlReader
 		
 		List<String> fileLines = this.GetLines(path);
 		
-		t.Filters = this.LoadEntity(fileLines);
+		this.LoadEntity(fileLines, t);
 		
 		return t;
 	}
@@ -41,7 +41,7 @@ public class JmlReader
 		Path jml = Paths.get(path, this._configEntity.InfoJmlName);
 		try
 		{
-			fileLines = Files.readAllLines(jml);
+			fileLines = Files.readAllLines(jml, StandardCharsets.ISO_8859_1);
 		}
 		catch(IOException e)
 		{
@@ -50,7 +50,7 @@ public class JmlReader
 		return fileLines;
 	}
 	
-	private List<FilterEntity> LoadEntity(List<String> fileLines)
+	private void LoadEntity(List<String> fileLines, TitleEntity t)
 	{
 		List<FilterEntity> fList = new ArrayList<FilterEntity>();
 		
@@ -62,23 +62,30 @@ public class JmlReader
 			String fn = line.substring(0, pos);
 			String fv = line.substring(pos + 1);
 			
-			FilterEntity fe = new FilterEntity(fn);
-			
-			if(fv.indexOf(this._configEntity.Separador) == -1)
+			if(fn.equals("Tittle"))
 			{
-				fe.Labels.add(new LabelEntity(fv));
-			}
+				t.Nombre = fv;
+			} 
 			else
 			{
-				String[] fvList = fv.split(this._configEntity.Separador);
-				for(String v : fvList)
+				FilterEntity fe = new FilterEntity(fn);
+				
+				if(fv.indexOf(this._configEntity.Separador) == -1)
 				{
-					fe.Labels.add(new LabelEntity(v));
+					fe.Labels.add(new LabelEntity(fv));
 				}
+				else
+				{
+					String[] fvList = fv.split(this._configEntity.Separador);
+					for(String v : fvList)
+					{
+						fe.Labels.add(new LabelEntity(v));
+					}
+				}
+				fList.add(fe);
 			}
-			fList.add(fe);
 		}
 		
-		return fList;
+		t.Filters = fList;
 	}
 }

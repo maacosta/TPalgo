@@ -43,6 +43,7 @@ public class ConfigManager
 		ConfigEntity config = new ConfigEntity();
 		config.Separador = this.getValue("separador");
 		config.InfoJmlName = this.getValue("info-jml-name");
+		config.AlbumsPath = this.getValue("albums-path");
 		return config;
 	}
 	

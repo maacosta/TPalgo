@@ -1,6 +1,11 @@
 package core;
 
 import interfaces.Library;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import entities.ConfigEntity;
 import entities.LibraryEntity;
 import imp.LibraryImp;
@@ -23,7 +28,18 @@ public class MediaFactory
 		this._jmlReader = new JmlReader(this._configEntity);
 		
 		this._libraryEntity = new LibraryEntity();
+		Finder f = new Finder(this._configEntity);
+		Path albumsPath = Paths.get(this._configEntity.AlbumsPath);
+		try
+		{
+			Files.walkFileTree(albumsPath,f);
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
 		
+		this._libraryEntity.Titles = f.getTitlesTree();
 		Library l = new LibraryImp(this._libraryEntity);
 		
 		return l;
