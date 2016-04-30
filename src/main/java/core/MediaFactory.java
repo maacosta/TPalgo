@@ -8,22 +8,19 @@ import imp.LibraryImp;
 public class MediaFactory
 {
 	private String _path;
-	private ConfigManager _configManager;
 	private JmlReader _jmlReader;
 	private LibraryEntity _libraryEntity;
+	private ConfigEntity _configEntity;
 	
 	public MediaFactory(String path)
 	{
 		this._path = path;
-		this._configManager = new ConfigManager();	
+		this._configEntity = new ConfigManager().getConfigEntity();	
 	}
 	
 	public Library CreateLibrary()
 	{
-		//ConfigManager debería devolver el ConfigEntity cargado
-		ConfigEntity config = new ConfigEntity();
-		
-		this._jmlReader = new JmlReader(config);
+		this._jmlReader = new JmlReader(this._configEntity);
 		
 		this._libraryEntity = new LibraryEntity();
 		
