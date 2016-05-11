@@ -2,4 +2,5 @@
 <jml-config>
 	<separador>;</separador>
 	<info-jml-name>info.jml</info-jml-name>
+	<albums-path></albums-path>
 </jml-config>

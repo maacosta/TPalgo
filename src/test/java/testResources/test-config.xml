@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jml-config>
-	<test>testValor</test>
+	<separador>test2</separador>
+	<info-jml-name>test1</info-jml-name>
 </jml-config>
