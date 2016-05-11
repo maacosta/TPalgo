@@ -57,7 +57,8 @@ public class JmlReader
 		for(String line : fileLines)
 		{
 			int pos = line.indexOf("=");
-			if(pos == -1) continue;
+			//sin = o sin valor, continuar
+			if(pos == -1 || pos == line.length() - 1) continue;
 			
 			String fn = line.substring(0, pos);
 			String fv = line.substring(pos + 1);
@@ -65,25 +66,22 @@ public class JmlReader
 			if(fn.equals("Tittle"))
 			{
 				t.Nombre = fv;
-			} 
+			}
+
+			FilterEntity fe = new FilterEntity(fn);
+			if(fv.indexOf(this._configEntity.Separador) == -1)
+			{
+				fe.Labels.add(new LabelEntity(fv));
+			}
 			else
 			{
-				FilterEntity fe = new FilterEntity(fn);
-				
-				if(fv.indexOf(this._configEntity.Separador) == -1)
+				String[] fvList = fv.split(this._configEntity.Separador);
+				for(String v : fvList)
 				{
-					fe.Labels.add(new LabelEntity(fv));
+					fe.Labels.add(new LabelEntity(v));
 				}
-				else
-				{
-					String[] fvList = fv.split(this._configEntity.Separador);
-					for(String v : fvList)
-					{
-						fe.Labels.add(new LabelEntity(v));
-					}
-				}
-				fList.add(fe);
 			}
+			fList.add(fe);
 		}
 		
 		t.Filters = fList;
