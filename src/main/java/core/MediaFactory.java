@@ -27,7 +27,6 @@ public class MediaFactory
 	{
 		this._jmlReader = new JmlReader(this._configEntity);
 		
-		this._libraryEntity = new LibraryEntity();
 		Finder f = new Finder(this._configEntity);
 		Path albumsPath = Paths.get(this._configEntity.AlbumsPath);
 		try
@@ -38,8 +37,9 @@ public class MediaFactory
 		{
 			e.printStackTrace();
 		}
-		
-		this._libraryEntity.Titles = f.getTitlesTree();
+
+		this._libraryEntity = new LibraryEntity(this._configEntity, f.getTitlesTree());
+
 		Library l = new LibraryImp(this._libraryEntity);
 		
 		return l;

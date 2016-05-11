@@ -60,12 +60,7 @@ public class LibraryImp implements Library
 
 	public Filter getFilter(String filtername)
 	{
-		throw new UnsupportedOperationException();
-		/*for (Filter filter : this.filters){
-			if(filter.getName() == filtername)
-				return filter;
-		}
-		return null;*/
+		return new FilterImp(this._libraryEntity, filtername);
 	}
 
 	public List<Label> getLabels(Filter f)

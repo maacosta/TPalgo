@@ -52,8 +52,6 @@ public class JmlReader
 	
 	private void LoadEntity(List<String> fileLines, TitleEntity t)
 	{
-		List<FilterEntity> fList = new ArrayList<FilterEntity>();
-		
 		for(String line : fileLines)
 		{
 			int pos = line.indexOf("=");
@@ -81,9 +79,7 @@ public class JmlReader
 					fe.Labels.add(new LabelEntity(v));
 				}
 			}
-			fList.add(fe);
+			t.Filters.add(fe);
 		}
-		
-		t.Filters = fList;
 	}
 }

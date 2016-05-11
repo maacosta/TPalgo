@@ -6,7 +6,9 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
+import entities.ConfigEntity;
 import entities.FilterEntity;
+import entities.LabelEntity;
 import entities.LibraryEntity;
 import entities.TitleEntity;
 import imp.LibraryImp;
@@ -25,10 +27,11 @@ public class LibraryTest
 		TitleEntity te2 = new TitleEntity();
 		te2.Nombre = "te2";
 		
-		LibraryEntity le = new LibraryEntity();
-		le.Titles = new ArrayList<TitleEntity>();
-		le.Titles.add(te1);
-		le.Titles.add(te2);
+		List<TitleEntity> titles = new ArrayList<TitleEntity>();
+		titles.add(te1);
+		titles.add(te2);
+
+		LibraryEntity le = new LibraryEntity(new ConfigEntity(), titles);
 		
 		Library l = new LibraryImp(le);
 		
@@ -42,29 +45,29 @@ public class LibraryTest
 	public void testGetFilter()
 	{
 		TitleEntity te1 = new TitleEntity();
-		te1.Filters = new ArrayList<FilterEntity>();
-		FilterEntity fe1_1 = new FilterEntity("Rock");
-		FilterEntity fe1_2 = new FilterEntity("Pop");
+		FilterEntity fe1_1 = new FilterEntity("Genero");
+		fe1_1.Labels.add(new LabelEntity("Rock"));
+		fe1_1.Labels.add(new LabelEntity("Pop"));
 		te1.Filters.add(fe1_1);
-		te1.Filters.add(fe1_2);
 		
 		TitleEntity te2 = new TitleEntity();
-		FilterEntity fe2_1 = new FilterEntity("Alternativo");
-		FilterEntity fe2_2 = new FilterEntity("Pop");
-		FilterEntity fe2_3 = new FilterEntity("Rock");
-		te1.Filters.add(fe2_1);
-		te1.Filters.add(fe2_2);
-		te1.Filters.add(fe2_3);
+		FilterEntity fe2_1 = new FilterEntity("Genero");
+		fe2_1.Labels.add(new LabelEntity("Alternativo"));
+		fe2_1.Labels.add(new LabelEntity("Pop"));
+		fe2_1.Labels.add(new LabelEntity("Rock"));
+		te2.Filters.add(fe2_1);
 		
-		LibraryEntity le = new LibraryEntity();
-		le.Titles = new ArrayList<TitleEntity>();
-		le.Titles.add(te1);
-		le.Titles.add(te2);
+		List<TitleEntity> titles = new ArrayList<TitleEntity>();
+		titles.add(te1);
+		titles.add(te2);
+
+		LibraryEntity le = new LibraryEntity(new ConfigEntity(), titles);
 		
-		Library l = new LibraryImp(le);
+		Library li = new LibraryImp(le);
 		
-		Filter f = l.getFilter("Rock");
+		Filter f = li.getFilter("Genero");
 		
-		Assert.assertEquals("Rock", f.getName());
+		Assert.assertEquals("Genero", f.getName());
+		Assert.assertEquals(3, f.getLabels().size());
 	}
 }
