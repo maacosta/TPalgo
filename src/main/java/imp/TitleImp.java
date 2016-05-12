@@ -3,12 +3,11 @@ package imp;
 import java.util.Hashtable;
 import java.util.List;
 
-import entities.FilterEntity;
+import entities.LabelEntity;
 import entities.LibraryEntity;
 import entities.TitleEntity;
 import interfaces.Filter;
 import interfaces.Label;
-import interfaces.Library;
 import interfaces.Title;
 
 public class TitleImp implements Title
@@ -44,11 +43,15 @@ public class TitleImp implements Title
 			Filter f = new FilterImp(this._libraryEntity, fe);
 			hash.put(f, f.getLabels());
 		});
-		throw new UnsupportedOperationException();
+		
+		return hash;
 	}
 	
-	public List<Label> getAtt(Filter attribute) 
+	public List<LabelEntity> getAtt(Filter filtername) 
 	{
-		throw new UnsupportedOperationException();
+		int i = 0;
+		for(; i < _titleEntity.Filters.size() && !_titleEntity.Filters.get(i).Nombre.equalsIgnoreCase(filtername.getName()); i++);
+		
+		return _titleEntity.Filters.get(i).Labels;
 	}
 }

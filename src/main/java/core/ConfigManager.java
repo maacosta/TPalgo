@@ -1,8 +1,12 @@
 package core;
 
 import java.io.InputStream;
-import javax.xml.parsers.*;
-import org.w3c.dom.*;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 
 import entities.ConfigEntity;
 
@@ -12,7 +16,7 @@ public class ConfigManager
 {
 	private Document doc;
 	
-	public ConfigManager(){
+	public ConfigManager() {
 		setDocument("/resources/config.xml");
 	}
 
@@ -51,4 +55,5 @@ public class ConfigManager
 		this.setDocument("/testResources/test-config.xml");
 		return this.getConfigEntity();
 	}
+	
 }

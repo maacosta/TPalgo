@@ -4,7 +4,6 @@ import java.util.List;
 import entities.LabelEntity;
 import entities.LibraryEntity;
 import interfaces.Label;
-import interfaces.Library;
 import interfaces.Title;
 
 

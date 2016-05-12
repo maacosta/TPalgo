@@ -1,12 +1,7 @@
 package imp;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Stream;
-
-import core.ConfigManager;
 import entities.FilterEntity;
 import entities.LibraryEntity;
 import entities.TitleEntity;
@@ -18,7 +13,7 @@ import interfaces.Title;
 public class LibraryImp implements Library
 {
 	private LibraryEntity _libraryEntity;
-	
+	List<Title> titleList = new ArrayList<Title>();
 	
 	public LibraryImp(LibraryEntity libraryEntity)
 	{
@@ -28,7 +23,7 @@ public class LibraryImp implements Library
 	
 	public List<Title> getTitles()
 	{
-		List<Title> titleList = new ArrayList<Title>();
+		titleList.clear();
 		
 		this._libraryEntity.Titles.forEach(te -> 
 		{
