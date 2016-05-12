@@ -44,11 +44,11 @@ public class TitleImp implements Title
 			Filter f = new FilterImp(this._libraryEntity, fe.Nombre);
 			hash.put(f, f.getLabels());
 		});
-		throw new UnsupportedOperationException();
+		return hash;
 	}
 	
 	public List<Label> getAtt(Filter attribute) 
 	{
-		throw new UnsupportedOperationException();
+		return this.getAtts().get(attribute);
 	}
 }
