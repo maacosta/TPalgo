@@ -1,6 +1,7 @@
 package imp;
 import java.util.List;
 
+import entities.FilterEntity;
 import entities.LabelEntity;
 import entities.LibraryEntity;
 import interfaces.Label;
@@ -10,19 +11,21 @@ import interfaces.Title;
 public class LabelImp implements Label
 {
 	private LibraryEntity _libraryEntity;
-	private LabelEntity _labelEntity;
+	private String _filtername;
+	private String _labelname;
 	
 	
-	public LabelImp(LibraryEntity libraryEntity, LabelEntity labelEntity)
+	public LabelImp(LibraryEntity libraryEntity, String filtername, String labelname)
 	{
 		this._libraryEntity = libraryEntity;
-		this._labelEntity = labelEntity;
+		this._filtername = filtername;
+		this._labelname = labelname;
 	}
 	
 	
 	public String getName()
 	{
-		return this._labelEntity.Nombre;
+		return this._labelname;
 	}
 
 	public List<Title> getTitles()

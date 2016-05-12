@@ -2,10 +2,14 @@ package entities;
 
 import java.util.List;
 
-import core.ConfigManager;
-
 public class LibraryEntity
 {
-	public ConfigManager Config;
+	public LibraryEntity(ConfigEntity config, List<TitleEntity> titles)
+	{
+		this.Config = config;
+		this.Titles = titles;
+	}
+	
+	public ConfigEntity Config;
 	public List<TitleEntity> Titles;
 }

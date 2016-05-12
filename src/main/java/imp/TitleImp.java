@@ -3,7 +3,6 @@ package imp;
 import java.util.Hashtable;
 import java.util.List;
 
-import entities.LabelEntity;
 import entities.LibraryEntity;
 import entities.TitleEntity;
 import interfaces.Filter;
@@ -40,18 +39,22 @@ public class TitleImp implements Title
 		
 		this._titleEntity.Filters.forEach(fe -> 
 		{
-			Filter f = new FilterImp(this._libraryEntity, fe);
+			Filter f = new FilterImp(this._libraryEntity, fe.Nombre);
 			hash.put(f, f.getLabels());
 		});
-		
+
 		return hash;
 	}
 	
-	public List<LabelEntity> getAtt(Filter filtername) 
+	public List<Label> getAtt(Filter filtername) 
 	{
-		int i = 0;
+
+		/*int i = 0;
 		for(; i < _titleEntity.Filters.size() && !_titleEntity.Filters.get(i).Nombre.equalsIgnoreCase(filtername.getName()); i++);
 		
-		return _titleEntity.Filters.get(i).Labels;
+		return _titleEntity.Filters.get(i).Labels;*/
+
+		return this.getAtts().get(filtername);
+
 	}
 }

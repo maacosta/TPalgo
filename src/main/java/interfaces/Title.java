@@ -10,5 +10,5 @@ public interface Title
 	public String getName();
 	public String getPath();
 	public Hashtable<Filter,List<Label>>  getAtts();
-	public List<LabelEntity> getAtt(Filter f);
+	public List<Label> getAtt(Filter f);
 }
