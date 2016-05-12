@@ -42,7 +42,7 @@ public class FilterImp implements Filter
 						if(!hash.containsKey(le.Nombre))
 						{
 							hash.put(le.Nombre, le);
-							labelList.add(new LabelImp(this._libraryEntity, le.Nombre));
+							labelList.add(new LabelImp(this._libraryEntity, this._filtername, le.Nombre));
 						}
 					});
 				}

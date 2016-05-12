@@ -1,20 +1,38 @@
 package testsIniciales;
 
+import java.util.List;
+
+import org.junit.Assert;
+import org.junit.Test;
+
 import entities.ConfigEntity;
 import entities.LabelEntity;
 import entities.LibraryEntity;
 import imp.LabelImp;
 import interfaces.Label;
-import junit.framework.TestCase;
 
-public class LabelTest extends TestCase
+public class LabelTest
 {
+	@Test
+	public void testGetName()
+	{
+		SetOfData sod = new SetOfData();
+		LibraryEntity le = new LibraryEntity(new ConfigEntity(), sod.getTitles_sod1());
+		
+		Label la = new LabelImp(le, "Genero", "Rock");
 
-	public void test(){
-		String labelName = "Rock";
-		LibraryEntity lie = new LibraryEntity(new ConfigEntity(), null);
-		LabelEntity le = new LabelEntity(labelName);
-		Label l = new LabelImp(lie, le.Nombre);
-		assertEquals(labelName, l.getName());
+		Assert.assertEquals("Rock", la.getName());
+	}
+	
+	@Test
+	public void testGetTitles()
+	{
+		Assert.assertEquals(true, false);
+	}
+	
+	@Test
+	public void testGetSublabels()
+	{
+		Assert.assertEquals(true, false);
 	}
 }

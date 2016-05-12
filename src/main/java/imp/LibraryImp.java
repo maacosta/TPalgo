@@ -71,14 +71,24 @@ public class LibraryImp implements Library
 
 	public Label getLabel(Filter f, String labelname)
 	{
-		throw new UnsupportedOperationException();
+		return new LabelImp(this._libraryEntity, f.getName(), labelname);
 	}
 
 	public List<Title> getTitles(Filter f, Label lb)
 	{
-		throw new UnsupportedOperationException();
-		/*Stream<Title> titlesList = titles.stream().filter(it -> it.getAtt(f).contains(lb));
+		List<Title> titleList = new ArrayList<Title>();
 		
-		return (List<Title>)titlesList;*/
+		for(TitleEntity te : this._libraryEntity.Titles)
+		{
+			for(FilterEntity fe : te.Filters)
+			{
+				if(fe.Nombre == f.getName())
+				{
+					titleList.add(new TitleImp(this._libraryEntity, te));
+				}
+			}
+		}
+		
+		return titleList;
 	}
 }
