@@ -1,5 +1,6 @@
 package imp;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -40,7 +41,11 @@ public class TitleImp implements Title
 		this._titleEntity.Filters.forEach(fe -> 
 		{
 			Filter f = new FilterImp(this._libraryEntity, fe.Nombre);
-			hash.put(f, f.getLabels());
+			List<Label> labels = new ArrayList<Label>();
+			
+			fe.Labels.forEach(l -> labels.add(new LabelImp(this._libraryEntity, fe.Nombre, l.Nombre)));
+			
+			hash.put(f, labels);
 		});
 
 		return hash;
@@ -48,13 +53,6 @@ public class TitleImp implements Title
 	
 	public List<Label> getAtt(Filter filtername) 
 	{
-
-		/*int i = 0;
-		for(; i < _titleEntity.Filters.size() && !_titleEntity.Filters.get(i).Nombre.equalsIgnoreCase(filtername.getName()); i++);
-		
-		return _titleEntity.Filters.get(i).Labels;*/
-
 		return this.getAtts().get(filtername);
-
 	}
 }

@@ -9,6 +9,7 @@ import org.junit.Test;
 import entities.ConfigEntity;
 import entities.LibraryEntity;
 import entities.TitleEntity;
+import imp.LibraryImp;
 import imp.TitleImp;
 import interfaces.Filter;
 import interfaces.Label;
@@ -60,82 +61,45 @@ public class TitleTest
 	}
 	
 	@Test
-	public void testGetAtts()
+	public void testGetAtts1()
 	{
 		SetOfData sod = new SetOfData();
 		List<TitleEntity> tel = sod.getTitles_sod1();
 		LibraryEntity le = new LibraryEntity(new ConfigEntity(), tel);
 		
-		TitleEntity te = null;
-		for(TitleEntity tei : tel)
-		{
-			if(tei.Nombre == "Disco 2")
-			{
-				te = tei;
-				break;
-			}
-		}
+		LibraryImp library = new LibraryImp(le);
 		
-		Title ti = new TitleImp(le, te);
-		Hashtable<Filter, List<Label>> att = ti.getAtts();
+		List<Title> titles = library.getTitles();
 		
-		Assert.assertEquals(2, att.size());
+		Hashtable<Filter,List<Label>> atts = titles.get(0).getAtts();
 		
-		Filter f = null;
-		Set<Filter> fis = att.keySet();
-
-		for(Filter fi : fis)
-		{
-			if(fi.getName() == "Genero")
-			{
-				f = fi;
-				break;
-			}
-		}
-		Assert.assertEquals(3, att.get(f).size());
+		Filter primerFiltro = (Filter)atts.keySet().toArray()[0];
+		Assert.assertEquals("Genero",primerFiltro.getName());
 		
-		for(Filter fi : fis)
-		{
-			if(fi.getName() == "Artista")
-			{
-				f = fi;
-				break;
-			}
-		}
+		List<Label> primeraListaLabels = (List<Label>)atts.values().toArray()[0];
 		
-		Assert.assertEquals(1, att.get(f).size());
+		Assert.assertEquals("Rock",primeraListaLabels.get(0).getName());
+		Assert.assertEquals("Pop",primeraListaLabels.get(1).getName());
 	}
 	
 	@Test
-	public void testGetAtt()
+	public void testGetAtts2()
 	{
 		SetOfData sod = new SetOfData();
 		List<TitleEntity> tel = sod.getTitles_sod1();
 		LibraryEntity le = new LibraryEntity(new ConfigEntity(), tel);
 		
-		TitleEntity te = null;
-		for(TitleEntity tei : tel)
-		{
-			if(tei.Nombre == "Disco 1")
-			{
-				te = tei;
-				break;
-			}
-		}
+		LibraryImp library = new LibraryImp(le);
 		
-		Title ti = new TitleImp(le, te);
-
-		Filter f = null;
-		Hashtable<Filter, List<Label>> att = ti.getAtts();
-		for(Filter fi : att.keySet())
-		{
-			if(fi.getName() == "Genero")
-			{
-				f = fi;
-				break;
-			}
-		}
+		List<Title> titles = library.getTitles();
 		
-		Assert.assertEquals(2, ti.getAtt(f).size());		
+		Hashtable<Filter,List<Label>> atts = titles.get(2).getAtts();
+		
+		Filter primerFiltro = (Filter)atts.keySet().toArray()[0];
+		Assert.assertEquals("Artista",primerFiltro.getName());
+		
+		List<Label> primeraListaLabels = (List<Label>)atts.values().toArray()[0];
+		
+		Assert.assertEquals("Bob Dylan",primeraListaLabels.get(0).getName());
 	}
 }
