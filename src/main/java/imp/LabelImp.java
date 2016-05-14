@@ -1,9 +1,11 @@
 package imp;
+import java.util.ArrayList;
 import java.util.List;
 
 import entities.FilterEntity;
 import entities.LabelEntity;
 import entities.LibraryEntity;
+import entities.TitleEntity;
 import interfaces.Label;
 import interfaces.Title;
 
@@ -30,7 +32,13 @@ public class LabelImp implements Label
 
 	public List<Title> getTitles()
 	{
-		throw new UnsupportedOperationException();
+		List<Title> t = new ArrayList<Title>();
+		
+		for(TitleEntity title : this._libraryEntity.Titles){
+			if(title.containsLabel(this._labelname))
+				t.add(new TitleImp(this._libraryEntity, title));
+		}
+		return t;
 	}
 
 	public List<Label> getSublabels()

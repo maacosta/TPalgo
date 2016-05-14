@@ -10,6 +10,7 @@ import entities.LabelEntity;
 import entities.LibraryEntity;
 import imp.LabelImp;
 import interfaces.Label;
+import interfaces.Title;
 
 public class LabelTest
 {
@@ -27,12 +28,15 @@ public class LabelTest
 	@Test
 	public void testGetTitles()
 	{
-		Assert.assertEquals(true, false);
+		SetOfData sod = new SetOfData();
+		LibraryEntity le = new LibraryEntity(new ConfigEntity(), sod.getTitles_sod1());
+		
+		Label la = new LabelImp(le, "Genero", "Rock");
+
+		List<Title> t = la.getTitles();
+		
+		Assert.assertEquals("Disco 1",t.get(0).getName());
+		Assert.assertEquals("Disco 2",t.get(1).getName());
 	}
-	
-	@Test
-	public void testGetSublabels()
-	{
-		Assert.assertEquals(true, false);
-	}
+
 }

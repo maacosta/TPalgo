@@ -2,4 +2,5 @@
 <jml-config>
 	<separador>test2</separador>
 	<info-jml-name>test1</info-jml-name>
+	<albums-path>path</albums-path>
 </jml-config>
