@@ -38,5 +38,22 @@ public class LabelTest
 		Assert.assertEquals("Disco 1",t.get(0).getName());
 		Assert.assertEquals("Disco 2",t.get(1).getName());
 	}
+	
+	@Test
+	public void testGetSublabels(){
+		
+		SetOfData sod = new SetOfData();
+		ConfigEntity cfg = new ConfigEntity();
+		cfg.sublabels = sod.getSublabels_sod1();
+		LibraryEntity le = new LibraryEntity(cfg, sod.getTitles_sod1());
+		
+		Label la = new LabelImp(le, "Genero", "Música del Mundo", cfg);
 
+		List<Label> l = la.getSublabels();
+		
+		Assert.assertEquals(3,l.size());
+		Assert.assertEquals("España",l.get(0).getName());
+		Assert.assertEquals("Brasil",l.get(1).getName());
+		Assert.assertEquals("Cuba",l.get(2).getName());
+	}
 }

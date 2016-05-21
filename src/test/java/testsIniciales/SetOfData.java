@@ -1,6 +1,7 @@
 package testsIniciales;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 import entities.FilterEntity;
@@ -45,5 +46,26 @@ public class SetOfData
 		titles.add(te3);
 
 		return titles;
+	}
+	
+	public Hashtable<String, List<LabelEntity>> getSublabels_sod1(){
+		
+		Hashtable<String, List<LabelEntity>> sub = new Hashtable<String, List<LabelEntity>>();
+		
+		ArrayList<LabelEntity> l1=new ArrayList<LabelEntity>();
+		l1.add(new LabelEntity("Rock"));
+		l1.add(new LabelEntity("Pop"));
+		l1.add(new LabelEntity("Electrónica"));
+		
+		sub.put("Géneros Populares",l1);
+		
+		ArrayList<LabelEntity> l2=new ArrayList<LabelEntity>();
+		l2.add(new LabelEntity("España"));
+		l2.add(new LabelEntity("Brasil"));
+		l2.add(new LabelEntity("Cuba"));
+		
+		sub.put("Música del Mundo",l2);
+		
+		return sub;
 	}
 }
