@@ -20,7 +20,7 @@ public class LabelTest
 		SetOfData sod = new SetOfData();
 		LibraryEntity le = new LibraryEntity(new ConfigEntity(), sod.getTitles_sod1());
 		
-		Label la = new LabelImp(le, "Genero", "Rock");
+		Label la = new LabelImp(le, "Genero", "Rock", new ConfigEntity());
 
 		Assert.assertEquals("Rock", la.getName());
 	}
@@ -31,7 +31,7 @@ public class LabelTest
 		SetOfData sod = new SetOfData();
 		LibraryEntity le = new LibraryEntity(new ConfigEntity(), sod.getTitles_sod1());
 		
-		Label la = new LabelImp(le, "Genero", "Rock");
+		Label la = new LabelImp(le, "Genero", "Rock", new ConfigEntity());
 
 		List<Title> t = la.getTitles();
 		

@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
+import entities.ConfigEntity;
 import entities.FilterEntity;
 import entities.LabelEntity;
 import entities.LibraryEntity;
@@ -13,12 +14,14 @@ public class FilterImp implements Filter
 {
 	private LibraryEntity _libraryEntity;
 	private String _filtername;
+	private ConfigEntity _configEntity;
 	
 	
-	public FilterImp(LibraryEntity libraryEntity, String filtername)
+	public FilterImp(LibraryEntity libraryEntity, String filtername, ConfigEntity config)
 	{
 		this._libraryEntity = libraryEntity;
 		this._filtername = filtername;
+		this._configEntity = config;
 	}
 	
 	
@@ -42,7 +45,7 @@ public class FilterImp implements Filter
 						if(!hash.containsKey(le.Nombre))
 						{
 							hash.put(le.Nombre, le);
-							labelList.add(new LabelImp(this._libraryEntity, this._filtername, le.Nombre));
+							labelList.add(new LabelImp(this._libraryEntity, this._filtername, le.Nombre, this._configEntity));
 						}
 					});
 				}

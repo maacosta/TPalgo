@@ -3,4 +3,12 @@
 	<separador>test2</separador>
 	<info-jml-name>test1</info-jml-name>
 	<albums-path>path</albums-path>
+	<sublabels>
+		<label>
+			<name>Música del Mundo</name>
+			<sublabel>España</sublabel>
+			<sublabel>Brasil</sublabel>
+			<sublabel>Cuba</sublabel>
+		</label>
+	</sublabels>
 </jml-config>

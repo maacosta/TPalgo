@@ -2,6 +2,8 @@ package imp;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
+
+import entities.ConfigEntity;
 import entities.FilterEntity;
 import entities.LibraryEntity;
 import entities.TitleEntity;
@@ -13,7 +15,7 @@ import interfaces.Title;
 public class LibraryImp implements Library
 {
 	private LibraryEntity _libraryEntity;
-	List<Title> titleList = new ArrayList<Title>();
+	private ConfigEntity _configEntity;
 	
 	public LibraryImp(LibraryEntity libraryEntity)
 	{
@@ -23,11 +25,11 @@ public class LibraryImp implements Library
 	
 	public List<Title> getTitles()
 	{
-		titleList.clear();
+		List<Title> titleList = new ArrayList<Title>();
 		
 		this._libraryEntity.Titles.forEach(te -> 
 		{
-			titleList.add(new TitleImp(this._libraryEntity, te));
+			titleList.add(new TitleImp(this._libraryEntity, te, this._configEntity));
 		});
 		
 		return titleList;
@@ -45,7 +47,7 @@ public class LibraryImp implements Library
 				if(!hash.containsKey(fe.Nombre))
 				{
 					hash.put(fe.Nombre, fe);
-					f.add(new FilterImp(this._libraryEntity, fe.Nombre));
+					f.add(new FilterImp(this._libraryEntity, fe.Nombre, this._configEntity));
 				}
 			}
 		}
@@ -55,7 +57,7 @@ public class LibraryImp implements Library
 
 	public Filter getFilter(String filtername)
 	{
-		return new FilterImp(this._libraryEntity, filtername);
+		return new FilterImp(this._libraryEntity, filtername, this._configEntity);
 	}
 
 	public List<Label> getLabels(Filter f)
@@ -66,7 +68,7 @@ public class LibraryImp implements Library
 
 	public Label getLabel(Filter f, String labelname)
 	{
-		return new LabelImp(this._libraryEntity, f.getName(), labelname);
+		return new LabelImp(this._libraryEntity, f.getName(), labelname, this._configEntity);
 	}
 
 	public List<Title> getTitles(Filter f, Label lb)
@@ -79,7 +81,7 @@ public class LibraryImp implements Library
 			{
 				if(fe.Nombre == f.getName())
 				{
-					titleList.add(new TitleImp(this._libraryEntity, te));
+					titleList.add(new TitleImp(this._libraryEntity, te, this._configEntity));
 				}
 			}
 		}

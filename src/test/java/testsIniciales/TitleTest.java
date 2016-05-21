@@ -34,7 +34,7 @@ public class TitleTest
 				break;
 			}
 		}
-		Title ti = new TitleImp(le, te);
+		Title ti = new TitleImp(le, te, new ConfigEntity());
 		
 		Assert.assertEquals("Disco 2", ti.getName());
 	}
@@ -55,7 +55,7 @@ public class TitleTest
 				break;
 			}
 		}
-		Title ti = new TitleImp(le, te);
+		Title ti = new TitleImp(le, te, new ConfigEntity());
 		
 		Assert.assertEquals("path 1", ti.getPath());
 	}
