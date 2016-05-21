@@ -40,7 +40,7 @@ public class MediaFactory
 
 		this._libraryEntity = new LibraryEntity(this._configEntity, f.getTitlesTree());
 
-		Library l = new LibraryImp(this._libraryEntity);
+		Library l = new LibraryImp(this._libraryEntity, this._configEntity);
 		
 		return l;
 	}

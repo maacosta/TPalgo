@@ -21,7 +21,7 @@ public class LibraryTest
 		SetOfData sod = new SetOfData();
 		LibraryEntity le = new LibraryEntity(new ConfigEntity(), sod.getTitles_sod1());
 		
-		Library li = new LibraryImp(le);
+		Library li = new LibraryImp(le, new ConfigEntity());
 		
 		List<Title> tL = li.getTitles();
 		
@@ -37,7 +37,7 @@ public class LibraryTest
 		SetOfData sod = new SetOfData();
 		LibraryEntity le = new LibraryEntity(new ConfigEntity(), sod.getTitles_sod1());
 		
-		Library li = new LibraryImp(le);
+		Library li = new LibraryImp(le, new ConfigEntity());
 		
 		List<Filter> fs = li.getFilters();
 		
@@ -50,7 +50,7 @@ public class LibraryTest
 		SetOfData sod = new SetOfData();
 		LibraryEntity le = new LibraryEntity(new ConfigEntity(), sod.getTitles_sod1());
 		
-		Library li = new LibraryImp(le);
+		Library li = new LibraryImp(le, new ConfigEntity());
 		
 		Filter f = li.getFilter("Genero");
 		
@@ -64,7 +64,7 @@ public class LibraryTest
 		SetOfData sod = new SetOfData();
 		LibraryEntity le = new LibraryEntity(new ConfigEntity(), sod.getTitles_sod1());
 		
-		Library li = new LibraryImp(le);
+		Library li = new LibraryImp(le, new ConfigEntity());
 		Filter fi1 = li.getFilter("Genero");
 		Filter fi2 = li.getFilter("Artista");
 		
@@ -78,7 +78,7 @@ public class LibraryTest
 		SetOfData sod = new SetOfData();
 		LibraryEntity le = new LibraryEntity(new ConfigEntity(), sod.getTitles_sod1());
 		
-		Library li = new LibraryImp(le);
+		Library li = new LibraryImp(le, new ConfigEntity());
 		Filter fi = li.getFilter("Genero");
 		
 		Assert.assertEquals("Rock", li.getLabel(fi, "Rock").getName());
@@ -90,7 +90,7 @@ public class LibraryTest
 		SetOfData sod = new SetOfData();
 		LibraryEntity le = new LibraryEntity(new ConfigEntity(), sod.getTitles_sod1());
 		
-		Library li = new LibraryImp(le);
+		Library li = new LibraryImp(le, new ConfigEntity());
 		Filter fi = li.getFilter("Genero");
 		Label la = li.getLabel(fi, "Rock");
 		List<Title> tl = li.getTitles(fi, la);
@@ -106,12 +106,33 @@ public class LibraryTest
 		SetOfData sod = new SetOfData();
 		LibraryEntity le = new LibraryEntity(new ConfigEntity(), sod.getTitles_sod1());
 		
-		Library li = new LibraryImp(le);
+		Library li = new LibraryImp(le, new ConfigEntity());
 		Filter fi = li.getFilter("Genero");
 		Label la = li.getLabel(fi, "Alternativo");
 		List<Title> tl = li.getTitles(fi, la);
 		
 		Assert.assertEquals(1, tl.size());
 		Assert.assertEquals(true, tl.stream().anyMatch(t -> t.getName() == "Disco 2"));
+	}
+	
+	@Test
+	public void testGetTitles_bySublabels()
+	{
+		SetOfData sod = new SetOfData();
+		ConfigEntity cfg = new ConfigEntity();
+		cfg.sublabels = sod.getSublabels_sod1();
+		
+		LibraryEntity le = new LibraryEntity(cfg, sod.getTitles_sod2());
+		
+		Library li = new LibraryImp(le, cfg);
+		Filter fi = li.getFilter("Genero");
+		Label la = li.getLabel(fi, "Géneros Populares");
+		
+		List<Title> tl = li.getTitles(fi, la);
+		
+		Assert.assertEquals(2, tl.size());
+		Assert.assertEquals(true, tl.stream().anyMatch(t -> t.getName() == "Disco 1"));
+		Assert.assertEquals(true, tl.stream().anyMatch(t -> t.getName() == "Disco 2"));
+		Assert.assertEquals(false, tl.stream().anyMatch(t -> t.getName() == "Disco 3"));
 	}
 }

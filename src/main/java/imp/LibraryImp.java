@@ -17,9 +17,10 @@ public class LibraryImp implements Library
 	private LibraryEntity _libraryEntity;
 	private ConfigEntity _configEntity;
 	
-	public LibraryImp(LibraryEntity libraryEntity)
+	public LibraryImp(LibraryEntity libraryEntity, ConfigEntity configEntity)
 	{
 		this._libraryEntity = libraryEntity;
+		this._configEntity = configEntity;
 	}
 	
 	
@@ -75,6 +76,21 @@ public class LibraryImp implements Library
 	{
 		List<Title> titleList = new ArrayList<Title>();
 		
+		if(this._configEntity.isSublabel(lb.getName())){
+			for(Label l : lb.getSublabels()){
+				addTitles(f,l,titleList);
+			}
+		}
+		else{
+			addTitles(f,lb,titleList);			
+		}
+		
+		return titleList;
+	}
+
+
+	private void addTitles(Filter f, Label lb, List<Title> titleList)
+	{
 		for(TitleEntity te : this._libraryEntity.Titles)
 		{
 			for(FilterEntity fe : te.Filters)
@@ -85,7 +101,5 @@ public class LibraryImp implements Library
 				}
 			}
 		}
-		
-		return titleList;
 	}
 }

@@ -13,6 +13,10 @@ public class ConfigEntity
 	public String AlbumsPath;
 	public Hashtable<String, List<LabelEntity>> sublabels;
 	
+	public ConfigEntity(){
+		this.sublabels = new Hashtable<String, List<LabelEntity>>();
+	}
+	
 	public boolean isSublabel(String labelName){
 		return this.sublabels.containsKey(labelName);
 	}

@@ -22,7 +22,7 @@ public class FilterTest
 		List<TitleEntity> tel = sod.getTitles_sod1();
 		LibraryEntity le = new LibraryEntity(new ConfigEntity(), tel);
 		
-		LibraryImp library = new LibraryImp(le);
+		LibraryImp library = new LibraryImp(le, new ConfigEntity());
 		
 		Filter fGenero = library.getFilter("Genero");
 		
