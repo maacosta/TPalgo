@@ -10,5 +10,11 @@
 			<sublabel>Brasil</sublabel>
 			<sublabel>Cuba</sublabel>
 		</label>
+		<label>
+			<name>Géneros Populares</name>
+			<sublabel>Rock</sublabel>
+			<sublabel>Pop</sublabel>
+			<sublabel>Electrónica</sublabel>
+		</label>
 	</sublabels>
 </jml-config>

@@ -7,6 +7,7 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import entities.ConfigEntity;
@@ -56,42 +57,33 @@ public class ConfigManager
 	
 	private Hashtable<String,List<LabelEntity>> getSublabels()
 	{
-		
-		NodeList sublabels = this.doc.getElementsByTagName("sublabels");
 		Hashtable<String, List<LabelEntity>> listaSublabels = new Hashtable<String, List<LabelEntity>>();
 		
+		Element sublabelsCollection = (Element) this.doc.getElementsByTagName("sublabels").item(0);
+		NodeList sublabels = sublabelsCollection.getElementsByTagName("label");
+		
 		for(int i = 0; i<sublabels.getLength(); i++){
-			NodeList label = sublabels.item(i).getChildNodes();
-			listaSublabels.put(this.getLabelNameFromNodeList(label),this.getSublabelsFromNodeList(label));
+			Element label = (Element) sublabels.item(i);
+			
+			String nombre = label.getNodeName();
+			listaSublabels.put(label.getElementsByTagName("name").item(0).getTextContent(),this.getSublabelsFromNodeList(label));
 		}
 		
 		return listaSublabels;
 	}
 
-	private List<LabelEntity> getSublabelsFromNodeList(NodeList label)
+	private List<LabelEntity> getSublabelsFromNodeList(Element label)
 	{
 		List<LabelEntity> lb = new ArrayList<LabelEntity>();
+		NodeList sublabels = label.getElementsByTagName("sublabel");
 		
-		for(int i=0; i<label.getLength(); i++){
-			Node nodo = label.item(i);
-			if(nodo.getNodeName() == "sublabel")
+		for(int i=0; i<sublabels.getLength(); i++){
+			Element nodo = (Element) sublabels.item(i);
+			if(nodo.getTagName() == "sublabel")
 				lb.add(new LabelEntity(nodo.getTextContent()));
 		}
 		
 		return lb;
-	}
-
-	private String getLabelNameFromNodeList(NodeList label)
-	{
-		String nombre = "";
-		
-		for(int i=0; i<label.getLength(); i++){
-			Node nodo = label.item(i);
-			if(nodo.getNodeName() == "name")
-				nombre = nodo.getTextContent();
-		}
-		
-		return nombre;
 	}
 
 	public ConfigEntity getTestConfigEntity(){
