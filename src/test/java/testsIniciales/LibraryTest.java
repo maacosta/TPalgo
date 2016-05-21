@@ -99,4 +99,19 @@ public class LibraryTest
 		Assert.assertEquals(true, tl.stream().anyMatch(t -> t.getName() == "Disco 1"));
 		Assert.assertEquals(true, tl.stream().anyMatch(t -> t.getName() == "Disco 2"));
 	}
+	
+	@Test
+	public void testGetTitles_byFilterLabel2()
+	{
+		SetOfData sod = new SetOfData();
+		LibraryEntity le = new LibraryEntity(new ConfigEntity(), sod.getTitles_sod1());
+		
+		Library li = new LibraryImp(le);
+		Filter fi = li.getFilter("Genero");
+		Label la = li.getLabel(fi, "Alternativo");
+		List<Title> tl = li.getTitles(fi, la);
+		
+		Assert.assertEquals(1, tl.size());
+		Assert.assertEquals(true, tl.stream().anyMatch(t -> t.getName() == "Disco 2"));
+	}
 }

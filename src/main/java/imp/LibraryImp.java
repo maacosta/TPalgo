@@ -79,7 +79,7 @@ public class LibraryImp implements Library
 		{
 			for(FilterEntity fe : te.Filters)
 			{
-				if(fe.Nombre == f.getName())
+				if(fe.Nombre == f.getName() && fe.containsLabel(lb.getName()))
 				{
 					titleList.add(new TitleImp(this._libraryEntity, te, this._configEntity));
 				}
